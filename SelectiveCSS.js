@@ -11,14 +11,16 @@ class AutoStyle {
             var http = new XMLHttpRequest();
             http.open('HEAD', url, false);
             http.send();
-            return http.status !== 404;
+            console.log(http.sta)
+            return http.status;
         }
         
-        if (!checkFile(url)) {
-            alert('位於 ' + url + ' 的文件不存在！');
-            return;
+        // 如果該url不存在文件則終止整個程式
+        if (checkFile(url) === 404) {
+            throw new Error('位於 ' + url + ' 的文件不存在！');
         }
 
+        // 定義優先級，0最低
         this.priority = priority;
     }
 }
@@ -34,7 +36,7 @@ class StyleFactory {
         var autoStyle = new AutoStyle(name, url, id, start, end, priority);
 
         // 如果參數不符合，則不會創建實例
-        if (AutoStyle) {
+        if (autoStyle) {
             // 判斷是否有相同id的自動樣式
             if (!document.querySelector('#' + id)) {
                 var link = document.createElement('link');
@@ -44,14 +46,14 @@ class StyleFactory {
 
                 document.head.appendChild(link);
             } else {
-                alert("已存在該id的自動樣式！")
+                throw new Error("已存在該id的自動樣式！");
             }
         }
     }
 }
 
+// 創建一個實例
 new StyleFactory().createAutoStyle('name', 'url', 'id', '2023-02-20', '2023-02-25', 1);
-
 
 // 導出工廠函數
 module.exports = StyleFactory;

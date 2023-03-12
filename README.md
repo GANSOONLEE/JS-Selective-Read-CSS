@@ -1,4 +1,9 @@
-# JS-Selective-Read-CSS
+# JS-Selective-Read-CSS (已廢棄)
+
+## 將使用 typescript 重新開發
+因爲考慮到 js 對無法使用修飾符 private public 之類的
+而且 interface 也是似有似無
+所以決定改用 `typescritp` 作爲開發語言
 
 ### 項目介紹
 利用js獲取伺服器的當前時間
